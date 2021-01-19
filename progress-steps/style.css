@@ -54,7 +54,7 @@ body {
     height: 4px;
     width: 0%;
     z-index: -1;
-    transition: 4s ease;
+    transition: 0.4s ease;
 }
 
 .circle {
