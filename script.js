@@ -1,41 +1,42 @@
-const button = document.getElementById('button')
-const toasts = document.getElementById('toasts')
+const loveMe = document.querySelector('.loveMe')
+const times = document.querySelector('#times')
 
-const messages = [
-    'Message One',
-    'Message Two',
-    'Message Three',
-    'Message Four',
-]
+let clickTime = 0
+let timesClicked = 0
 
-const types = [
-    'info',
-    'success',
-    'error',
-]
+loveMe.addEventListener('click', (e) => {
+    if (clickTime === 0) {
+        clickTime = new Date().getTime()
+    } else {
+        if((new Date().getTime() - clickTime) < 800) {
+            createHeart(e)
+            clickTime = 0
+        } else {
+            clickTime = new Date().getTime()
+        }
+    }
+})
 
-button.addEventListener('click', () => createNotification())
+const createHeart = (e) => {
+    const heart = document.createElement('i')
+    heart.classList.add('fas')
+    heart.classList.add('fa-heart')
 
-function createNotification(message = null, type = null) {
-    const notif = document.createElement('div')
-    notif.classList.add('toast')
-    notif.classList.add(type ? type : getRandomType())
+    const x = e.clientX
+    const y = e.clientY
 
-    notif.innerText = message ? message : getRandomMessage()
+    const leftOffset = e.target.offsetLeft
+    const topOffset = e.target.offsetTop
 
-    toasts.appendChild(notif)
+    const xInside = x - leftOffset
+    const yInside = y - topOffset
 
-    setTimeout(() => {
-        notif.remove()
-    }, 3000)
-}
+    heart.style.top = `${yInside}px`
+    heart.style.left = `${xInside}px`
 
-// Just to show to how pass random messages in
-function getRandomMessage() {
-    return messages[Math.floor(Math.random() * messages.length)]
-}
+    loveMe.appendChild(heart)
 
-// Just to show hot to pass random styles in
-function getRandomType() {
-    return types[Math.floor(Math.random() * types.length)]
+    times.innerHTML = ++timesClicked
+
+    setTimeout(() => heart.remove(), 1000)
 }
