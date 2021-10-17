@@ -1,42 +1,28 @@
-const loveMe = document.querySelector('.loveMe')
-const times = document.querySelector('#times')
+const container = document.getElementById('container')
+const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71']
+const SQUARES = 500
 
-let clickTime = 0
-let timesClicked = 0
+for(let i = 0; i < SQUARES; i++) {
+    const square = document.createElement('div')
+    square.classList.add('square')
 
-loveMe.addEventListener('click', (e) => {
-    if (clickTime === 0) {
-        clickTime = new Date().getTime()
-    } else {
-        if((new Date().getTime() - clickTime) < 800) {
-            createHeart(e)
-            clickTime = 0
-        } else {
-            clickTime = new Date().getTime()
-        }
-    }
-})
+    square.addEventListener('mouseover', () => setColor(square))
+    square.addEventListener('mouseout', () => removeColor(square))
 
-const createHeart = (e) => {
-    const heart = document.createElement('i')
-    heart.classList.add('fas')
-    heart.classList.add('fa-heart')
+    container.appendChild(square)
+}
 
-    const x = e.clientX
-    const y = e.clientY
+function setColor(element) {
+    const color = getRandomColor()
+    element.style.background = color
+    element.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`
+}
 
-    const leftOffset = e.target.offsetLeft
-    const topOffset = e.target.offsetTop
+function removeColor(element) {
+    element.style.background = '#1d1d1d'
+    element.style.boxShadow = '0 0 2px #000'
+}
 
-    const xInside = x - leftOffset
-    const yInside = y - topOffset
-
-    heart.style.top = `${yInside}px`
-    heart.style.left = `${xInside}px`
-
-    loveMe.appendChild(heart)
-
-    times.innerHTML = ++timesClicked
-
-    setTimeout(() => heart.remove(), 1000)
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)]
 }
