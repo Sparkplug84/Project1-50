@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
+    background-color: #fef9f2;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -12,13 +15,76 @@ body {
     margin: 0;
 }
 
-.background {
-    background: url('https://images.unsplash.com/photo-1556745757-8d76bdb6984b') no-repeat center center/cover;
-    position: absolute;
-    top: -20px;
-    bottom: -20px;
-    left: -20px;
-    right: -20px;
-    z-index: -1;
-    filter: blur(20px);
+.panel-container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 4px;
+    font-size: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.panel-container strong {
+    line-height: 20px;
+}
+
+.ratings-container {
+    display: flex;
+    margin: 20px 0;
+}
+
+.rating {
+    flex: 1;
+    cursor: pointer;
+    padding: 20px;
+    margin: 10px 5px;
+}
+
+.rating img {
+    width: 50px;
+}
+
+.rating:hover,
+.rating.active {
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rating small {
+    color: #555;
+    display: inline-block;
+    margin: 10px 0 0;
+}
+
+.rating:hover small,
+.rating.active small {
+    color: #111;
+}
+
+.btn {
+    background-color: #302d2b;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 30px;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.fa-heart {
+    color: red;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
